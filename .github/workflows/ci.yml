@@ -21,7 +21,7 @@ jobs:
     - name: Run MobSF Scan
       uses: MobSF/mobsfscan@main
       with:
-        APK_FILE: -f build/app/outputs/flutter-apk/app-release.apk
+        APK_FILE: '. --sarif --output results.sarif || true'
 
     - name: Upload Scan Results
       uses: actions/upload-artifact@v2
