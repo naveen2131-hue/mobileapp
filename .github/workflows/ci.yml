@@ -1,40 +1,17 @@
-name: MobSF Scan
+name: mobsfscan
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
 
 jobs:
-  mobsf-scan:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Setup Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.x
-  
-    - name: Install System Dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y build-essential
-
-    - name: Install Pip Dependencies
-      run: |
-        pip install --upgrade pip
-        pip install ruamel.yaml.clib
-
+    - uses: actions/checkout@v2
     - name: mobsfscan
       uses: MobSF/mobsfscan@main
       with:
-        args: '. --sarif --output results.sarif || true'
-
-    - name: Upload Scan Results
-      uses: actions/upload-artifact@v2
-      with:
-        name: mobsf-scan-results
-        path: results.sarif
+        args: '. --json'
