@@ -18,10 +18,6 @@ jobs:
       with:
         python-version: 3.x
 
-    - name: Install MobSF
-      run: |
-        pip install mobsf
-
     - name: Run MobSF Scan
       uses: MobSF/mobsfscan@main
       with:
