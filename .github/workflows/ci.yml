@@ -15,10 +15,10 @@ jobs:
     - name: mobsfscan
       uses: MobSF/mobsfscan@main
       with:
-        args: '. --sarif --output results.sarif || true'
+        args: '. --sonarqube --output results.sonarqube || true'
    
     - name: Upload Scan Results
       uses: actions/upload-artifact@v2
       with:
         name: mobsf-scan-results
-        path: results.sarif
+        path: results.sonarqube
