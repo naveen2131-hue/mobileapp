@@ -1,30 +1,22 @@
-name: MobSF Scan
-
+name: mobsfscan sarif
 on:
   push:
-    branches:
-      - master
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
 
 jobs:
-  mobsf-scan:
+  mobsfscan:
     runs-on: ubuntu-latest
-
+    name: mobsfscan code scanning
     steps:
-    - name: Checkout code
+    - name: Checkout the code
       uses: actions/checkout@v2
-
-    - name: Setup Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.x
-
-    - name: Run MobSF Scan
+    - name: mobsfscan
       uses: MobSF/mobsfscan@main
       with:
-        APK_FILE: '. --sarif --output results.sarif || true'
-
-    - name: Upload Scan Results
-      uses: actions/upload-artifact@v2
+        args: '. --sarif --output results.sarif || true'
+    - name: Upload mobsfscan report
+      uses: github/codeql-action/upload-sarif@v2
       with:
-        name: mobsf-scan-results
-        path: ~/mobsf_reports
+        sarif_file: results.sarif
