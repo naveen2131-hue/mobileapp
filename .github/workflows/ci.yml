@@ -32,10 +32,10 @@ jobs:
       run: |
         pip install mobsf
 
-     - name: mobsfscan
-       uses: MobSF/mobsfscan@main
-       with:
-         args: '. --sarif --output results.sarif || true'
+    - name: mobsfscan
+      uses: MobSF/mobsfscan@main
+      with:
+        args: '. --sarif --output results.sarif || true'
 
     - name: Upload Scan Results
       uses: actions/upload-artifact@v2
